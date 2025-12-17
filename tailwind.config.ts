@@ -16,6 +16,7 @@ const config: Config = {
       },
       zIndex: {
         "999": "999",
+        "9998": "9998",
         "9999": "9999",
       },
       spacing: {
