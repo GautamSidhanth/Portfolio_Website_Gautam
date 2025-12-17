@@ -10,7 +10,8 @@ import {
 } from "framer-motion";
 
 export default function CustomCursor() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // Default to true to prevent flash on mobile
+  const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; angle: number }[]
   >([]);
@@ -29,15 +30,22 @@ export default function CustomCursor() {
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => {
-      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+      // Safe check for window
+      if (typeof window !== "undefined") {
+        setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+      }
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      // Only track mouse if not mobile
+      if (!isMobile) {
+          mouseX.set(e.clientX);
+          mouseY.set(e.clientY);
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -46,10 +54,12 @@ export default function CustomCursor() {
       window.removeEventListener("resize", checkMobile);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [mouseX, mouseY]);
+  }, [isMobile, mouseX, mouseY]);
 
   // Particle Loop and Rotation Logic
   useEffect(() => {
+    if (isMobile || !mounted) return;
+
     let lastX = smoothX.get();
     let lastY = smoothY.get();
     
@@ -106,19 +116,24 @@ export default function CustomCursor() {
     }, 16); // ~60fps check
 
     return () => clearInterval(interval);
-  }, [smoothX, smoothY]);
+  }, [smoothX, smoothY, isMobile, mounted]);
 
   // Cleanup old particles independently to ensure they fade out
   useEffect(() => {
+    // Only run cleanup if we have particles
+    if (particles.length === 0) return;
+
     const cleanup = setInterval(() => {
-      if (particles.length > 0) {
-        setParticles((prev) => prev.slice(1));
-      }
+      setParticles((prev) => prev.slice(1));
     }, 50); // Remove faster for cleaner trail
     return () => clearInterval(cleanup);
   }, [particles.length]);
 
-  if (isMobile) return null;
+  // Transform mouse position to center the cursor
+  const cursorX = useTransform(smoothX, (x) => x - 16);
+  const cursorY = useTransform(smoothY, (y) => y - 16);
+
+  if (!mounted || isMobile) return null;
 
   return (
     <>
@@ -135,8 +150,8 @@ export default function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 z-[9999] pointer-events-none"
         style={{
-          x: useTransform(smoothX, (x) => x - 16), // Center offset
-          y: useTransform(smoothY, (y) => y - 16), // Center offset
+          x: cursorX,
+          y: cursorY,
         }}
         animate={{
           rotate: rotation,
@@ -164,7 +179,7 @@ function GasParticle({ x, y }: { x: number; y: number }) {
       }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="absolute w-3 h-3 bg-gradient-to-t from-orange-500 to-yellow-300 rounded-full blur-[1px]"
+      className="absolute w-3 h-3 bg-linear-to-t from-orange-500 to-yellow-300 rounded-full blur-[1px]"
       style={{ left: -6, top: -6 }} // Center offset
     />
   );
