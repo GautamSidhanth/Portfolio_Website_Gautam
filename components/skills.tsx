@@ -27,10 +27,10 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="mb-28 max-w-212 scroll-mt-28 text-center sm:mb-40"
+      className="mb-28 max-w-212 scroll-mt-28 text-center sm:mb-40 px-4"
     >
       <SectionHeading>My Skills</SectionHeading>
-      <ul className="flex flex-wrap justify-center gap-2 text-lg text-gray-800">
+      <ul className="flex flex-wrap justify-center gap-2 text-lg text-gray-200">
         {skillsData.map((skill, index) => (
           <motion.li
             className=""
@@ -44,7 +44,7 @@ export default function Skills() {
             custom={index}
           >
             <motion.div
-                 className="bg-white borderBlack rounded-xl px-5 py-3 dark:bg-white/10 dark:text-white/80 transition hover:scale-105 hover:bg-gray-50 dark:hover:bg-white/20 cursor-default shadow-sm"
+                 className="bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-white/80 transition hover:scale-105 hover:bg-white/20 cursor-default shadow-sm"
                  animate={{ y: [0, -6, 0] }}
                  transition={{
                    duration: 3 + (index % 3), 

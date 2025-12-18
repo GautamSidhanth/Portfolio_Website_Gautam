@@ -1,7 +1,5 @@
 import React from "react";
-import { CgWorkAlt } from "react-icons/cg";
-import { FaReact, FaUniversity } from "react-icons/fa";
-import { LuGraduationCap, LuBook } from "react-icons/lu";
+import { FaReact, FaUniversity, FaGraduationCap, FaBook, FaBriefcase } from "react-icons/fa";
 import url from "@/public/url.png";
 import InterviewAI from "@/public/InterviewAI.png";
 import chatty from "@/public/chatty.png";
@@ -25,8 +23,8 @@ export const links = [
     hash: "#skills",
   },
   {
-    name: "Experience",
-    hash: "#experience",
+    name: "Timeline",
+    hash: "#timeline",
   },
   {
     name: "Contact",
@@ -40,7 +38,7 @@ export const experiencesData = [
     location: "Bhadrak, Odisha",
     description:
       "Laid a strong academic foundation at SBD International School, consistently excelling in core subjects and achieving 84.4% in Class 10.",
-    icon: React.createElement(LuGraduationCap),
+    icon: <FaGraduationCap />,
     date: "2019",
   },
   {
@@ -48,7 +46,7 @@ export const experiencesData = [
     location: "Bhubaneswar, Odisha",
     description:
       "Completed Higher Secondary education with a major in Science and Mathematics, securing 81.4% in Class 12.",
-    icon: React.createElement(LuBook),
+    icon: <FaBook />,
     date: "2019 - 2021",
   },
   {
@@ -56,15 +54,15 @@ export const experiencesData = [
     location: "Bhopal, Madhya Pradesh",
     description:
       "Pursuing a Bachelor of Technology in Computer Science. Maintaining a CGPA of 7.85 while actively contributing to technical societies and hackathons.",
-    icon: React.createElement(FaUniversity),
+    icon: <FaUniversity />,
     date: "2021 - 2025",
   },
     {
-    title: "MeetMux By Altrodav Technology",
+    title: "MeetMux by Altrodav Technology",
     location: "Bengaluru, Karnataka",
     description:
       "Architected cloud infrastructure and CI/CD pipelines using Docker, AWS, and Kubernetes. Successfully reduced deployment time by 70% and optimized system uptime to 99.9%.",
-    icon: React.createElement(CgWorkAlt),
+    icon: <FaBriefcase />,
     date: "March 2025 - June 2025",
   },
 ] as const;
@@ -101,7 +99,7 @@ export const projectsData = [
     title: "BloxY",
     description:
       "A next-gen web platform leveraging Edge computing. Built with Cloudflare Workers and Hono for sub-millisecond response times and superior scalability.",
-    tags: ["CloudFlare Worker", "Next.js", "Postgresql", "Tailwind", "Hono"],
+    tags: ["CloudFlare Worker", "Next.js", "PostgreSQL", "Tailwind", "Hono"],
     imageUrl: blogxy,
     githubUrl: "https://github.com/GautamSidhanth/BLOGxY",
     liveUrl: "https://blogxy-git-main-gautamsidhanths-projects.vercel.app/",

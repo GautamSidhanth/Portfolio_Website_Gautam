@@ -34,21 +34,32 @@ export default function Project({
       }}
       className="group mb-3 sm:mb-8 last:mb-0"
     >
-      <section className="bg-gray-100 max-w-200 border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-100 hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-2xl backdrop-blur-[10px] dark:border-white/5 sm:group-hover:scale-[1.02]">
+      <section className="bg-white/10 max-w-200 border border-white/10 rounded-lg overflow-hidden sm:pr-8 relative sm:h-100 hover:bg-white/20 transition sm:group-even:pl-8 text-white shadow-lg hover:shadow-2xl backdrop-blur-[10px] sm:group-hover:scale-[1.02] flex flex-col sm:block h-auto">
         
         {/* Shine Effect */}
-        <div className="absolute top-0 -left-full w-full h-full bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-12 transition-all duration-700 ease-in-out sm:group-hover:left-full z-10 pointer-events-none"></div>
-        <div className="pt-4 pb-4 px-5 sm:pl-10 sm:pr-2 sm:pt-8 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-88 z-20 relative">
-          <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-200">
+        <div className="absolute top-0 -left-full w-full h-full bg-linear-to-r from-transparent via-white/10 to-transparent skew-x-12 transition-all duration-700 ease-in-out sm:group-hover:left-full z-10 pointer-events-none"></div>
+        
+        {/* Mobile Image (First on Mobile) */}
+        <div className="relative w-full h-52 sm:hidden">
+             <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              className="object-cover rounded-t-lg"
+            />
+        </div>
+
+        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-88 z-20 relative">
+          <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-gray-400">
             {title}
           </h3>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
+          <p className="mt-2 leading-relaxed text-white/70">
             {description}
           </p>
           <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
             {tags.map((tag, index) => (
               <li
-                className="bg-black/70 px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
+                className="bg-black/50 px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white/80 rounded-full border border-white/10"
                 key={index}
               >
                 {tag}
@@ -60,7 +71,7 @@ export default function Project({
             <a
               href={githubUrl}
               target="_blank"
-              className="bg-white p-3 text-gray-700 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 shadow-md hover:shadow-xl"
+              className="bg-white/10 p-3 text-white/90 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer border border-white/10 hover:bg-white/20 shadow-md hover:shadow-xl"
             >
               <FaGithub size={19} />
             </a>
@@ -68,11 +79,12 @@ export default function Project({
             <a
               href={liveUrl}
               target="_blank"
-              className="bg-gray-900 text-white px-5 py-2.5 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition shadow-md hover:shadow-xl dark:bg-white/10 text-sm font-semibold"
+              className="bg-white/10 text-white px-5 py-2.5 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition shadow-md hover:shadow-xl hover:bg-white/20 border border-white/10 text-sm font-semibold"
             >
               Live Demo{" "}
               <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
             </a>
+            {/* Removed the extra brace here */}
           </div>
         </div>
 
@@ -94,6 +106,7 @@ export default function Project({
         group-even:right-[initial]
         group-even:-left-40"
         />
+        
       </section>
     </motion.div>
   );

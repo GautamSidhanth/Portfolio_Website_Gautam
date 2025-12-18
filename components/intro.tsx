@@ -59,13 +59,13 @@ export default function Intro() {
         </div>
 
         <motion.h1
-          className="mb-10 mt-4 px-4 text-2xl font-medium leading-normal sm:text-4xl"
+          className="mb-10 mt-4 px-4 text-xl font-medium leading-normal sm:text-4xl"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
         >
           <span className="font-bold">Hello, I’m Gautam.</span> I’m a{" "}
-          <span className="font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+          <span className="font-bold bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-400">
             <TypewriterEffect words={["Full-Stack Developer", "DevOps Engineer"]} />
           </span>{" "}
           with deep expertise in building{" "}
@@ -94,7 +94,7 @@ export default function Intro() {
           </Link>
 
           <a
-            className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 shadow-lg hover:shadow-xl"
+            className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer border border-black/10 dark:bg-white/10 shadow-lg hover:shadow-xl"
             href="/CV.pdf"
             download="Gautam_Sidhanth_CV.pdf"
           >
@@ -103,7 +103,7 @@ export default function Intro() {
           </a>
 
           <a
-            className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 shadow-lg hover:shadow-xl"
+            className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border border-black/10 dark:bg-white/10 dark:text-white/60 shadow-lg hover:shadow-xl"
             href="https://www.linkedin.com/in/gautam-sidhanth-973187135/"
             target="_blank"
           >
@@ -111,7 +111,7 @@ export default function Intro() {
           </a>
 
           <a
-            className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 shadow-lg hover:shadow-xl"
+            className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer border border-black/10 dark:bg-white/10 dark:text-white/60 shadow-lg hover:shadow-xl"
             href="https://github.com/GautamSidhanth"
             target="_blank"
           >

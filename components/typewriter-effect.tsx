@@ -47,7 +47,7 @@ export default function TypewriterEffect({ words }: TypewriterEffectProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-        className="inline-block w-[2px] h-6 sm:h-8 bg-gray-950 dark:bg-white ml-1 align-middle"
+        className="inline-block w-[2px] h-6 sm:h-8 bg-white ml-1 align-middle"
       />
     </span>
   );

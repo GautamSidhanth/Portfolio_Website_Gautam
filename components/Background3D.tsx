@@ -3,7 +3,6 @@
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useTheme } from "@/context/theme-context";
 
 export default function Background3D() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
@@ -20,8 +19,8 @@ export default function Background3D() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none">
-      <Canvas camera={{ position: [0, 0, 1] }}>
+    <div className="fixed top-0 left-0 w-full h-full pointer-events-none">
+      <Canvas camera={{ position: [0, 0, 1] }} style={{ pointerEvents: "none" }}>
         <Stars mouse={mouse} />
       </Canvas>
     </div>
@@ -29,12 +28,27 @@ export default function Background3D() {
 }
 
 function Stars({ mouse }: { mouse: { x: number; y: number } }) {
-  const { theme } = useTheme();
   const ref = useRef<THREE.Points>(null!);
   
+  const [texture] = useState(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 128;
+    canvas.height = 128;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 128, 128);
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    return texture;
+  });
+
   // Generate random positions for stars
   const positions = useMemo(() => {
-    const count = 4000; 
+    const count = 1500; 
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const r = 15 + Math.random() * 35; 
@@ -51,12 +65,12 @@ function Stars({ mouse }: { mouse: { x: number; y: number } }) {
   useFrame((state, delta) => {
     if (ref.current) {
       // Basic rotation
-      ref.current.rotation.x -= delta / 15;
-      ref.current.rotation.y -= delta / 20;
+      ref.current.rotation.x -= delta / 30; // Slower rotation
+      ref.current.rotation.y -= delta / 40;
 
       // Mouse parallax
-      const x = (mouse.x * 0.2 - ref.current.rotation.y) * 0.1;
-      const y = (mouse.y * 0.2 - ref.current.rotation.x) * 0.1;
+      const x = (mouse.x * 0.1 - ref.current.rotation.y) * 0.05;
+      const y = (mouse.y * 0.1 - ref.current.rotation.x) * 0.05;
       ref.current.rotation.x += y;
       ref.current.rotation.y += x;
     }
@@ -75,10 +89,13 @@ function Stars({ mouse }: { mouse: { x: number; y: number } }) {
       </bufferGeometry>
       <pointsMaterial
         transparent
-        color={theme === 'light' ? "#3b82f6" : "#ffffff"}
-        size={0.05}
+        map={texture}
+        alphaTest={0.5}
+        color="#ffffff"
+        size={0.15}
         sizeAttenuation={true}
         depthWrite={false}
+        opacity={1}
       />
     </points>
   );

@@ -15,29 +15,30 @@
 
 
 :root {
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 240, 240, 255;
-  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 10, 10, 15;
+  --background-end-rgb: 10, 10, 15;
+  --foreground-rgb: 248, 250, 252;
   --accent-color: 79, 70, 229;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-start-rgb: 10, 10, 15;
-    --background-end-rgb: 10, 10, 15;
-    --foreground-rgb: 248, 250, 252;
+
+/* Only hide cursor on devices that support hover (desktop/mouse) */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scroll-behavior: smooth !important;
+    scroll-padding-top: 5rem;
+    cursor: none !important;
+  }
+
+  /* Ensure links and buttons also don't show the hand cursor */
+  a, button, [role="button"] {
+    cursor: none !important;
   }
 }
 
 html {
   scroll-behavior: smooth !important;
   scroll-padding-top: 5rem;
-  cursor: none !important;
-}
-
-/* Ensure links and buttons also don't show the hand cursor */
-a, button, [role="button"] {
-  cursor: none !important;
 }
 
 body {
@@ -47,6 +48,17 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #a78bfa; /* purple-400 */
+  color: #fff;
+}
+
+/* For dark mode specific selection if needed, but the purple works for both */
+.dark ::selection {
+  background-color: #8b5cf6; /* violet-500 */
+  color: #fff;
 }
 
 @layer utilities {
