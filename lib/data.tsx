@@ -135,6 +135,7 @@ export const skillsData = [
   "Docker Swarm",
   "Kubernetes",
   "Helm",
+  "GitOps",
   "AWS EC2",
   "AWS ECS",
   "AWS ECR",
